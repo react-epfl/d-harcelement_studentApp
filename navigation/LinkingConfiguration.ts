@@ -6,14 +6,24 @@ export default {
     screens: {
       Root: {
         screens: {
-          TabOne: {
+          Chats: {
             screens: {
-              TabOneScreen: 'one',
+              ChatsScreen: 'chats',
             },
           },
-          TabTwo: {
+          Témoignages: {
             screens: {
-              TabTwoScreen: 'two',
+              TemoignagesScreen: 'temoignages',
+            },
+          },
+          Contacts: {
+            screens: {
+              ContactsScreen: 'contacts',
+            },
+          },
+          Paramètres: {
+            screens: {
+              ParametresScreen: 'parametres',
             },
           },
         },
