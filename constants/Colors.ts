@@ -17,4 +17,5 @@ export default {
     tabIconSelected: tintColorDark,
   },
   primarycolor: tintColorLight,
+  fadedcolor: '#AEAEAE'
 };
