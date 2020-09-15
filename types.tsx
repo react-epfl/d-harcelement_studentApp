@@ -16,6 +16,7 @@ export type ChatsParamList = {
 
 export type TemoignagesParamList = {
   TemoignagesScreen: undefined;
+  TemoignageCreateScreen: undefined;
 };
 
 export type ContactsParamList = {

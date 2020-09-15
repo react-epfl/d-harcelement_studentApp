@@ -7,9 +7,16 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ChatsScreen from '../screens/ChatsScreen';
 import TemoignagesScreen from '../screens/TemoignagesScreen';
+import TemoignageCreateScreen from '../screens/Temoignages/TemoignageCreateScreen';
 import ContactsScreen from '../screens/ContactsScreen';
 import ParametresScreen from '../screens/ParametresScreen';
 import { BottomTabParamList, ChatsParamList, TemoignagesParamList, ContactsParamList, ParametresParamList } from '../types';
+import { Button } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { StyleSheet } from 'react-native';
+
+import iconSet from '@expo/vector-icons/build/Fontisto';
+import Navigation from '.';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -20,6 +27,7 @@ export default function BottomTabNavigator() {
     <BottomTab.Navigator
       initialRouteName="Chats"
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
+      {/* Chat Stacks Start */}
       <BottomTab.Screen
         name="Chats"
         component={ChatsNavigator}
@@ -27,6 +35,9 @@ export default function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-chatbubbles" color={color} />,
         }}
       />
+      {/* Chat Stacks End */}
+
+      {/* Temoignage Stack Start */}
       <BottomTab.Screen
         name="Témoignages"
         component={TemoignagesNavigator}
@@ -34,6 +45,9 @@ export default function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-book" color={color} />,
         }}
       />
+      {/* Temoignage Stack End */}
+
+      {/* Contacts Stack Start */}
       <BottomTab.Screen
         name="Contacts"
         component={ContactsNavigator}
@@ -41,6 +55,9 @@ export default function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-contacts" color={color} />,
         }}
       />
+      {/* Contacts Stack End */}
+
+      {/* Parameters Stack Start */}
       <BottomTab.Screen
         name="Paramètres"
         component={ParametresNavigator}
@@ -48,6 +65,7 @@ export default function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-settings" color={color} />,
         }}
       />
+      {/* Parameters Stack End */}
     </BottomTab.Navigator>
   );
 }
@@ -68,7 +86,9 @@ function ChatsNavigator() {
       <ChatsStack.Screen
         name="ChatsScreen"
         component={ChatsScreen}
-        options={{ headerTitle: 'Chats' }}
+        options={{ 
+          headerTitle: 'Chats'
+        }}
       />
     </ChatsStack.Navigator>
   );
@@ -76,17 +96,42 @@ function ChatsNavigator() {
 
 const TemoignagesStack = createStackNavigator<TemoignagesParamList>();
 
-function TemoignagesNavigator() {
+function TemoignagesNavigator({ navigation }) {
   return (
     <TemoignagesStack.Navigator>
       <TemoignagesStack.Screen
         name="TemoignagesScreen"
         component={TemoignagesScreen}
-        options={{ headerTitle: 'Témoignages' }}
+        options={{ 
+          headerTitle: 'Témoignages',
+          headerRight: () => (
+            <Button
+              icon={
+                <Icon
+                  name="plus"
+                  color={Colors.primarycolor}
+                  size={20}
+                />
+              }
+              type="clear"
+              style={styles.rightheaderbutton}
+              onPress={() => navigation.navigate('TemoignageCreateScreen')}
+            />
+          )
+        }}
+      />
+
+      <TemoignagesStack.Screen
+        name="TemoignageCreateScreen"
+        component={TemoignageCreateScreen}
+        options={{ 
+          headerTitle: 'Nouveau Témoignage'
+        }}
       />
     </TemoignagesStack.Navigator>
   );
 }
+
 
 const ContactsStack = createStackNavigator<ContactsParamList>();
 
@@ -96,7 +141,9 @@ function ContactsNavigator() {
       <ContactsStack.Screen
         name="ContactsScreen"
         component={ContactsScreen}
-        options={{ headerTitle: 'Contacts' }}
+        options={{ 
+          headerTitle: 'Contacts'
+        }}
       />
     </ContactsStack.Navigator>
   );
@@ -111,8 +158,16 @@ function ParametresNavigator() {
       <ParametresStack.Screen
         name="ParametresScreen"
         component={ParametresScreen}
-        options={{ headerTitle: 'Paramètres' }}
+        options={{
+          headerTitle: 'Paramètres'
+        }}
       />
     </ParametresStack.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  rightheaderbutton: {
+    marginRight: 10,
+  },
+});
