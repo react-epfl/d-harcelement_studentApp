@@ -1,23 +1,35 @@
 import * as React from 'react';
-import { StyleSheet, FlatList, TouchableHighlight } from 'react-native';
+import { StyleSheet, FlatList, SafeAreaView, StatusBar, TouchableOpacity } from 'react-native';
 import Colors from '../constants/Colors';
 
 import { Text, View } from '../components/Themed';
 
 export default function TemoignagesScreen({ navigation }) {
+
   return (
     <View style={styles.container}>
       <FlatList
         data={EXAMPLE_DATA}
+        keyExtractor={t => t.id}
         renderItem={({ item }) => (
-          <View style={{flex: 1, flexDirection: 'column'}}>
-            <Text style={styles.listitemcontent}>{item.content}</Text>
-            <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Text style={styles.listitemlocation}>{item.location}</Text>
-              <Text style={styles.listitemdatetime}>{item.datetime}</Text>
+          <TouchableOpacity 
+            key={item.id}
+            onPress={() => navigation.push('TemoignageViewScreen', {
+              id: item.id,
+              content: item.content,
+              location: item.location,
+              datetime: item.datetime,
+            })}
+            >
+            <View style={{flex: 1, flexDirection: 'column'}}>
+              <Text style={styles.listitemcontent}>{item.content}</Text>
+              <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between'}}>
+                <Text style={styles.listitemlocation}>{item.location}</Text>
+                <Text style={styles.listitemdatetime}>{item.datetime}</Text>
+              </View>
+              <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
             </View>
-            <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-          </View>
+          </TouchableOpacity>
         )}
       />
     </View>

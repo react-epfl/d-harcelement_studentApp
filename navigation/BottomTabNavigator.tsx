@@ -8,6 +8,9 @@ import useColorScheme from '../hooks/useColorScheme';
 import ChatsScreen from '../screens/ChatsScreen';
 import TemoignagesScreen from '../screens/TemoignagesScreen';
 import TemoignageCreateScreen from '../screens/Temoignages/TemoignageCreateScreen';
+import TemoignageViewScreen from '../screens/Temoignages/TemoignageViewScreen';
+
+
 import ContactsScreen from '../screens/ContactsScreen';
 import ParametresScreen from '../screens/ParametresScreen';
 import { BottomTabParamList, ChatsParamList, TemoignagesParamList, ContactsParamList, ParametresParamList } from '../types';
@@ -126,6 +129,14 @@ function TemoignagesNavigator({ navigation }) {
         component={TemoignageCreateScreen}
         options={{ 
           headerTitle: 'Nouveau Témoignage'
+        }}
+      />
+
+      <TemoignagesStack.Screen
+        name="TemoignageViewScreen"
+        component={TemoignageViewScreen}
+        options={{ 
+          headerTitle: 'Témoignage'
         }}
       />
     </TemoignagesStack.Navigator>

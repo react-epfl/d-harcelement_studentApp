@@ -14,7 +14,8 @@ export default {
           Témoignages: {
             screens: {
               TemoignagesScreen: 'temoignages',
-              TemoignageCreateScreen: 'temoignagecreate'
+              TemoignageCreateScreen: 'temoignagecreate',
+              TemoignageViewScreen: 'temoignageview',
             },
           },
           Contacts: {
