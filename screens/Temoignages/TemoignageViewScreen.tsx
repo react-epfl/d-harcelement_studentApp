@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 
 import { Text, View } from '../../components/Themed';
@@ -12,9 +13,9 @@ export default function TemoignageViewScreen({ route, navigation}) {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>{JSON.stringify(content)}</Text>
-        <Text style={styles.title}>{JSON.stringify(location)}</Text>
-        <Text style={styles.title}>{JSON.stringify(datetime)}</Text>
+        <Text style={styles.title}>{content}</Text>
+        <Text style={styles.title}>{location}</Text>
+        <Text style={styles.title}>{datetime}</Text>
       </View>
     );
   }

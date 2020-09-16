@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { StyleSheet, FlatList, SafeAreaView, StatusBar, TouchableOpacity } from 'react-native';
 import Colors from '../constants/Colors';
 
@@ -6,11 +7,14 @@ import { Text, View } from '../components/Themed';
 
 export default function TemoignagesScreen({ navigation }) {
 
+  //create state variable
+  const [tdata, setTdata] = useState(EXAMPLE_DATA);
+
   return (
     <View style={styles.container}>
       <FlatList
-        data={EXAMPLE_DATA}
-        keyExtractor={t => t.id}
+        style={styles.flatlist}
+        data={tdata}
         renderItem={({ item }) => (
           <TouchableOpacity 
             key={item.id}
@@ -69,16 +73,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  flatlist: {
+    width: '100%',
+  },
   listitemcontent: {
-    padding: 0,
+    padding: 10,
     fontSize: 18,
   },
   listitemlocation: {
-    padding: 0,
+    padding: 10,
     color: Colors.fadedcolor,
   },
   listitemdatetime: {
-    padding: 0,
+    padding: 10,
     color: Colors.fadedcolor,
   },
   title: {

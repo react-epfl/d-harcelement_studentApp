@@ -118,7 +118,7 @@ function TemoignagesNavigator({ navigation }) {
               }
               type="clear"
               style={styles.rightheaderbutton}
-              onPress={() => navigation.navigate('TemoignageCreateScreen')}
+              onPress={() => navigation.push('TemoignageCreateScreen')}
             />
           )
         }}
