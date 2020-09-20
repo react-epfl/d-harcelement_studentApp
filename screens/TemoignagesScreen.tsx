@@ -5,10 +5,25 @@ import Colors from '../constants/Colors';
 
 import { Text, View } from '../components/Themed';
 
-export default function TemoignagesScreen({ navigation }) {
+export default function TemoignagesScreen({ navigation, route }) {
+
+  const [tdata, setTdata] = useState(EXAMPLE_DATA);
+
+  React.useEffect(() => {
+    if(route.params?.content) {
+      
+      //post updated, do something with route.params.content
+      var tmp = {
+        id: 11,
+        content: String(route.params.content),
+        location: String(route.params.location),
+        datetime: String(route.params.datetime),
+      };
+      setTdata(tdata.concat(tmp));
+    }
+  }, [route.params?.post]);
 
   //create state variable
-  const [tdata, setTdata] = useState(EXAMPLE_DATA);
 
   return (
     <View style={styles.container}>
@@ -17,7 +32,7 @@ export default function TemoignagesScreen({ navigation }) {
         data={tdata}
         renderItem={({ item }) => (
           <TouchableOpacity 
-            key={item.id}
+            key={item.id.toString()}
             onPress={() => navigation.push('TemoignageViewScreen', {
               id: item.id,
               content: item.content,
@@ -40,7 +55,7 @@ export default function TemoignagesScreen({ navigation }) {
   );
 }
 
-let EXAMPLE_DATA = [
+var EXAMPLE_DATA = [
     {
       id: 0,
       content: "L'intimidation fait beaucoup de mal",
