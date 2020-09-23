@@ -43,7 +43,7 @@ export default function TemoignagesScreen({ navigation, route }) {
               })}
               >
               <View style={{flex: 1, flexDirection: 'column'}}>
-                <Text style={styles.listitemcontent}>{item.content}</Text>
+                <Text numberOfLines={1} style={styles.listitemcontent}>{item.content}</Text>
                 <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between'}}>
                   <Text style={styles.listitemlocation}>{item.location}</Text>
                   <Text style={styles.listitemdatetime}>{item.datetime}</Text>
@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
   },
   listitemcontent: {
     padding: 10,
+    flex: 1,
     fontSize: 18,
   },
   listitemlocation: {

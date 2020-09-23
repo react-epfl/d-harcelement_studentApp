@@ -19,7 +19,7 @@ export default function TemoignageViewScreen({ route, navigation}) {
       <ScrollView style={styles.scrollview} contentContainerStyle={{ flexGrow: 1 }}>
         <View style={styles.container}>
           <TextInput
-            style={{width: '90%' , height: '100%'}}
+            style={{width: '90%' , height: '100%', marginTop: 10}}
             editable={false}
             multiline
             value={content}
