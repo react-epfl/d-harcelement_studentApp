@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { StyleSheet, FlatList, SafeAreaView, StatusBar, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { StyleSheet, FlatList, RefreshControl, TouchableOpacity, ActivityIndicator } from 'react-native';
 import Colors from '../constants/Colors';
 
 import { Text, View } from '../components/Themed';
@@ -9,20 +9,6 @@ export default function TemoignagesScreen({ navigation, route }) {
 
   const [data, setData] = useState([]);
   const [isLoading, setLoading] = useState(true);
-
-  // React.useEffect(() => {
-  //   if(route.params?.content) {
-      
-  //     //post updated, do something with route.params.content
-  //     var tmp = {
-  //       id: 11,
-  //       content: String(route.params.content),
-  //       location: String(route.params.location),
-  //       datetime: String(route.params.datetime),
-  //     };
-  //     setData(tdata.concat(tmp));
-  //   }
-  // }, [route.params?.post]);
 
   //Need those two lines for testing puposes as my server doesn't allow cors
   const proxyurl = "https://cors-anywhere.herokuapp.com/";
@@ -35,7 +21,10 @@ export default function TemoignagesScreen({ navigation, route }) {
       .finally(() => setLoading(false));
   }, []);
 
-  //create state variable
+  const refreshList = () => {
+    setData([]);
+    
+  }
 
   return (
     <View style={styles.container}>
@@ -63,38 +52,18 @@ export default function TemoignagesScreen({ navigation, route }) {
               </View>
             </TouchableOpacity>
           )}
+          refreshControl={
+            <RefreshControl
+              //refresh control used for the Pull to Refresh
+              refreshing={isLoading}
+              onRefresh={refreshList}
+            />
+          }
         />
       )}
     </View>
   );
 }
-
-// var EXAMPLE_DATA = [
-//     {
-//       id: 0,
-//       content: "L'intimidation fait beaucoup de mal",
-//       location: "Préverenges",
-//       datetime: "2020-09-10",
-//     },
-//     {
-//       id: 1,
-//       content: "L'intimidation n'est pas une blague",
-//       location: "Renens",
-//       datetime: "2020-08-21",
-//     },
-//     {
-//       id: 2,
-//       content: "L'intimidation fait beaucoup de mal",
-//       location: "Lausanne",
-//       datetime: "2020-09-05",
-//     },
-//     {
-//       id: 3,
-//       content: "L'intimidation fait beaucoup de mal",
-//       location: "Préverenges",
-//       datetime: "2020-08-09",
-//     },
-//   ];
 
 const styles = StyleSheet.create({
   container: {
