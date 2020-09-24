@@ -14,7 +14,7 @@ export default function TemoignagesScreen({ navigation, route }) {
   const proxyurl = "https://cors-anywhere.herokuapp.com/";
   const url = "https://borden.ch/temoignages.json"; // site that doesn’t send Access-Control-*
   React.useEffect(() => {
-    fetch(proxyurl + url)
+    fetch(url)
       .then((response) => response.json())
       .then((json) => setData(json))
       .catch((error) => console.error(error))
