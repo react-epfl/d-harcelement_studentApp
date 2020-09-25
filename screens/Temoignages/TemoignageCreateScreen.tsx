@@ -1,12 +1,13 @@
 import { preventAutoHide } from 'expo-splash-screen';
 import * as React from 'react';
-import { StyleSheet, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, TextInput, ScrollView, KeyboardAvoidingView, Keyboard, Platform, TouchableWithoutFeedback } from 'react-native';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Colors from '../../constants/Colors';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text, View } from '../../components/Themed';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function TemoignageCreateScreen() {
 
@@ -15,74 +16,71 @@ export default function TemoignageCreateScreen() {
   const [postText, setPostText] = React.useState('');
 
   return (
-    <SafeAreaView style={styles.maincontainer}>
-      <ScrollView style={styles.scrollview} contentContainerStyle={{ flexGrow: 1 }}>
-        <View style={styles.container}>
-          <Text style={styles.title}>Créer un nouveau témoignage</Text>
-          <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-          <TextInput
-            style={{ backgroundColor: '#EEE', width: '90%' , height: '100%'}}
-            placeholder="Décrivez votre témoignage"
-            editable
-            multiline
-            value={postText}
-            onChangeText={setPostText}
-          />
-        </View>
+        <KeyboardAvoidingView
+          behavior={Platform.OS == "ios" ? "padding" : "height"}
+          style={{flex: 1}}
+          >
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.inner}>
+              <View style={{flex: 2}}>
+                <TextInput
+                  style={{ backgroundColor: '#EEE', width: '100%' , height: '100%'}}
+                  placeholder="Décrivez votre témoignage"
+                  editable
+                  multiline
+                  value={postText}
+                  onChangeText={setPostText}
+                  />
+              </View>
 
-        <View style={styles.horizontalcontainer}>
+              <View style={{ flex:1, flexDirection: 'row', justifyContent: 'space-around'}}>
 
-        <Button
-          style={styles.button}
-          icon={
-            <Icon
-              name="ban"
-              color='white'
-              style={styles.buttonicon}
-              size={20}
-            />
-          }
-          title="Annuler"
-          type="solid"
-          onPress={() => navigation.goBack() }
-          />
+                <Button
+                  style={styles.button}
+                  icon={
+                    <Ionicons
+                      name="ios-close"
+                      color='white'
+                      style={styles.buttonicon}
+                      size={25}
+                    />
+                  }
+                  title="Annuler"
+                  type="solid"
+                  onPress={() => navigation.goBack() }
+                  />
 
-          <Button
-            style={styles.button}
-            icon={
-              <Icon
-                name="paper-plane"
-                color='white'
-                style={styles.buttonicon}
-                size={20}
-              />
-            }
-            title="Envoyer"
-            type="solid"
-            onPress={() => {
-              navigation.navigate('TemoignagesScreen', { content: postText, location: 'St-Prex', datetime: '2020-09-16'});
-            }}
-          />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+                <Button
+                  style={styles.button}
+                  icon={
+                    <Ionicons
+                      name="ios-send"
+                      color='white'
+                      style={styles.buttonicon}
+                      size={25}
+                    />
+                  }
+                  title="Envoyer"
+                  type="solid"
+                  onPress={() => {
+                    navigation.navigate('TemoignagesScreen', { content: postText, location: 'St-Prex', datetime: '2020-09-16'});
+                  }}
+                  />
+              </View>
+            </View>
+          </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
-  maincontainer: {
+  inner: {
+    padding: 24,
     flex: 1,
-    alignItems: 'center',
-    width: '100%',
-    justifyContent: 'center',
-    flexDirection: 'column'
+    justifyContent: 'space-around'
   },
-  scrollview: {
-    flex: 1,
-    width: '100%',
-},
   container: {
-    flex: 5,
+    flexGrow: 1,
     alignItems: 'center',
     width: '100%',
     justifyContent: 'center',
@@ -96,7 +94,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   button: {
-    margin: 20
+    margin: 20,
+    minWidth: '30%'
   },
   title: {
     fontSize: 20,

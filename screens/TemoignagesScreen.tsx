@@ -2,6 +2,8 @@ import * as React from 'react';
 import { useState } from 'react';
 import { StyleSheet, FlatList, RefreshControl, TouchableOpacity, ActivityIndicator } from 'react-native';
 import Colors from '../constants/Colors';
+import { Ionicons } from '@expo/vector-icons';
+import { Button } from 'react-native-elements';
 
 import { Text, View } from '../components/Themed';
 
@@ -10,9 +12,8 @@ export default function TemoignagesScreen({ navigation, route }) {
   const [data, setData] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
-  //Need those two lines for testing puposes as my server doesn't allow cors
-  const proxyurl = "https://cors-anywhere.herokuapp.com/";
-  const url = "https://borden.ch/temoignages.json"; // site that doesn’t send Access-Control-*
+  const url = "https://borden.ch/temoignages.json"; 
+
   React.useEffect(() => {
     fetch(url)
       .then((response) => response.json())
@@ -22,9 +23,58 @@ export default function TemoignagesScreen({ navigation, route }) {
   }, []);
 
   const refreshList = () => {
-    setData([]);
+    setLoading(true);
+    fetch(url)
+      .then((response) => response.json())
+      .then((json) => setData(json))
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
     
   }
+
+  const FlatListItemSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: "100%",
+          backgroundColor: "#AAA",
+        }}
+      />
+    );
+  }
+
+  const renderItem = ({ item }) => (
+    <TouchableOpacity 
+      key={item.id.toString()}
+      onPress={() => navigation.push('TemoignageViewScreen', {
+        id: item.id,
+        content: item.content,
+        location: item.location,
+        datetime: item.datetime,
+      })}
+      >
+      <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+        <View style={{flex: 6, flexDirection: 'column'}}>
+          <Text numberOfLines={1} style={styles.listitemcontent}>{item.content}</Text>
+          <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between'}}>
+            <Text style={styles.listitemlocation}>{item.location}</Text>
+            <Text style={styles.listitemdatetime}>{item.datetime}</Text>
+          </View>
+        </View>
+
+        {/* icon vote unvote */}
+        <View style={{flex: 1, flexDirection: 'column', alignContent: 'center'}}>
+          <Button
+            icon={
+              <Ionicons name="ios-ribbon" size={24} color="gray" />
+            }
+            type="clear"
+            />
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
 
   return (
     <View style={styles.container}>
@@ -32,26 +82,9 @@ export default function TemoignagesScreen({ navigation, route }) {
         <FlatList
           style={styles.flatlist}
           data={data}
-          renderItem={({ item }) => (
-            <TouchableOpacity 
-              key={item.id.toString()}
-              onPress={() => navigation.push('TemoignageViewScreen', {
-                id: item.id,
-                content: item.content,
-                location: item.location,
-                datetime: item.datetime,
-              })}
-              >
-              <View style={{flex: 1, flexDirection: 'column'}}>
-                <Text numberOfLines={1} style={styles.listitemcontent}>{item.content}</Text>
-                <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between'}}>
-                  <Text style={styles.listitemlocation}>{item.location}</Text>
-                  <Text style={styles.listitemdatetime}>{item.datetime}</Text>
-                </View>
-                <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-              </View>
-            </TouchableOpacity>
-          )}
+          ItemSeparatorComponent = { FlatListItemSeparator }
+          keyExtractor={item => item.id.toString()}
+          renderItem={ renderItem }
           refreshControl={
             <RefreshControl
               //refresh control used for the Pull to Refresh

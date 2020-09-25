@@ -15,7 +15,6 @@ import ContactsScreen from '../screens/ContactsScreen';
 import ParametresScreen from '../screens/ParametresScreen';
 import { BottomTabParamList, ChatsParamList, TemoignagesParamList, ContactsParamList, ParametresParamList } from '../types';
 import { Button } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { StyleSheet } from 'react-native';
 
 import iconSet from '@expo/vector-icons/build/Fontisto';
@@ -110,9 +109,9 @@ function TemoignagesNavigator({ navigation }) {
           headerRight: () => (
             <Button
               icon={
-                <Icon
-                  name="plus"
-                  color={Colors.primarycolor}
+                <Ionicons
+                  name="ios-create"
+                  color='black'
                   size={20}
                 />
               }

@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Colors from '../../constants/Colors';
 import { Text, View } from '../../components/Themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
 
 
 export default function TemoignageViewScreen({ route, navigation}) {
@@ -67,7 +68,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   button: {
-    margin: 20
+    margin: 20,
+    padding: 10
   },
   title: {
     fontSize: 20,
