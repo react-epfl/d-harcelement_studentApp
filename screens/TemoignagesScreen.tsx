@@ -32,6 +32,12 @@ export default function TemoignagesScreen({ navigation, route }) {
     
   }
 
+  const itemVoted = (id:number) => {
+    console.info('POST TO SERVER item id: ' + id);
+    console.info('fetch new data')
+    refreshList();
+  }
+
   const FlatListItemSeparator = () => {
     return (
       <View
@@ -67,9 +73,11 @@ export default function TemoignagesScreen({ navigation, route }) {
         <View style={{flex: 1, flexDirection: 'column', alignContent: 'center'}}>
           <Button
             icon={
-              <Ionicons name="ios-ribbon" size={24} color="gray" />
+              <Ionicons name="ios-ribbon" size={24} color={item.voted ? '#A00' : '#EEE'} />
             }
             type="clear"
+            title={item.voted}
+            onPress = {() => itemVoted(item.id)}
             />
         </View>
       </View>
