@@ -76,7 +76,6 @@ export default function TemoignagesScreen({ navigation, route }) {
               <Ionicons name="ios-ribbon" size={24} color={item.voted ? '#A00' : '#EEE'} />
             }
             type="clear"
-            title={item.voted}
             onPress = {() => itemVoted(item.id)}
             />
         </View>
