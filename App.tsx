@@ -1,49 +1,47 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useEffect, useRef, useState} from 'react';
-import { Text, View, StyleSheet, AppState, Alert } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { AppState, Alert } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
-import LocalAuth from './components/LocalAuth';
 import {authenticateAsync} from 'expo-local-authentication'
-
-
-const usePrevious = (value) => {
-  const ref = useRef();
-  useEffect(() => {
-    ref.current = value;
-  });
-  return ref.current;
-};
 
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
 
-  const [appState, setState] = useState('inactive');
-  const authenticateUser = async () => {
-    const {success, error: authError = ''} = await authenticateAsync();
-    authError && Alert.alert(authError)
-  };
+  const [locked, setLocked] = useState(true);
+
+  const localAuth = () => {
+    authenticateAsync({
+      promptMessage: 'Unlock to access app',
+    }).then(({ success }) => {
+      if (success) {
+        setLocked(false);
+        console.log('device unlocked');
+      }
+    });
+  }
+
+  useEffect(() => {
+    localAuth();
+  }, []);
 
   const _handleAppStateChange = async nextAppState => {
-    console.log(nextAppState);
-    if (appState.match(/inactive|background/) && nextAppState === 'active') {
-      authenticateUser();
+    if(!locked) {
+      if(nextAppState === 'inactive' || nextAppState === 'background') {
+        console.log('locking device');
+        setLocked(true);
+      }
     }
-    setState(nextAppState);
   };
-
 
   AppState.addEventListener('change', _handleAppStateChange);
 
-
-
-
-  if (!isLoadingComplete) {
+  if (!isLoadingComplete || locked) {
     return null;
   } else {
     return (
