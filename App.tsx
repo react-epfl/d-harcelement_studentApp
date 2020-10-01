@@ -13,7 +13,25 @@ export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
 
+
+  
+  const unlockedViews = (
+    <SafeAreaProvider>
+      <Navigation colorScheme={colorScheme} />
+      <StatusBar />
+    </SafeAreaProvider>
+  );
+
+  const lockedViews = (
+    <SafeAreaProvider>
+      <Navigation colorScheme={colorScheme} />
+      <StatusBar />
+    </SafeAreaProvider>
+  );
+
   const [locked, setLocked] = useState(true);
+  const [appState, SetAppState] = useState(AppState.currentState);
+  const [mainView, setMainView] = useState(lockedViews);
 
   const localAuth = () => {
     authenticateAsync({
@@ -21,34 +39,34 @@ export default function App() {
     }).then(({ success }) => {
       if (success) {
         setLocked(false);
+        setMainView(unlockedViews);
         console.log('device unlocked');
       }
     });
   }
 
   useEffect(() => {
-    localAuth();
-  }, []);
+    if(locked == true && AppState.currentState == 'active') {
+      localAuth();
+    }
+  }, [locked, appState]);
 
-  const _handleAppStateChange = async nextAppState => {
+  const _handleAppStateChange = async (nextAppState) => {
     if(!locked) {
       if(nextAppState === 'inactive' || nextAppState === 'background') {
         console.log('locking device');
         setLocked(true);
       }
     }
+    SetAppState(nextAppState);
   };
+
 
   AppState.addEventListener('change', _handleAppStateChange);
 
   if (!isLoadingComplete || locked) {
     return null;
   } else {
-    return (
-      <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
-      </SafeAreaProvider>
-    );
+    return mainView;
   }
 }
