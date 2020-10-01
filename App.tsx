@@ -40,7 +40,6 @@ export default function App() {
       if (success) {
         setLocked(false);
         setMainView(unlockedViews);
-        console.log('device unlocked');
       }
     });
   }
@@ -54,8 +53,8 @@ export default function App() {
   const _handleAppStateChange = async (nextAppState) => {
     if(!locked) {
       if(nextAppState === 'inactive' || nextAppState === 'background') {
-        console.log('locking device');
         setLocked(true);
+        setMainView(lockedViews);
       }
     }
     SetAppState(nextAppState);
