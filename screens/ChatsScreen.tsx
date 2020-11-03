@@ -3,14 +3,12 @@ import { StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
+import ChatBot from 'react-native-chatbot';
+import ChatBotSteps from '../constants/ChatBotSteps'
 
 export default function ChatsScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Chats</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/ChatsScreen.tsx" />
-    </View>
+    <ChatBot steps={ChatBotSteps.steps} />
   );
 }
 
