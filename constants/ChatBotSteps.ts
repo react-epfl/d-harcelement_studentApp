@@ -85,7 +85,7 @@ const steps = [
     },
     {
         id: '13',
-        message: 'quelqu\'un m\'a envoyé des messages instantanés, des posts sur mon mur, des e mails ou des sms méchants ou a créé un site internet qui se moquait de moi',
+        message: 'quelqu\'un m\'a envoyé des message instantanés, des posts sur mon mur, des e mails ou des sms méchants ou a créé un site internet qui se moquait de moi',
         trigger: '14',
     },
     {
@@ -120,7 +120,7 @@ const steps = [
     },
     {
         id: '18',
-        messages: 'certaines de mes affaires ont été abîmées, cassées, détruites',
+        message: 'certaines de mes affaires ont été abîmées, cassées, détruites',
         trigger: '19'
     },
     {
@@ -135,7 +135,7 @@ const steps = [
     },
     {
         id: '20',
-        messages: 'je me suis fait frapper',
+        message: 'je me suis fait frapper',
         trigger: '21'
     },
     {
@@ -150,7 +150,7 @@ const steps = [
     },
     {
         id: '22',
-        messages: 'je me suis fait menacer',
+        message: 'je me suis fait menacer',
         trigger: '23'
     },
     {
@@ -165,7 +165,7 @@ const steps = [
     },
     {
         id: '24',
-        messages: 'j\'ai été racketté-e',
+        message: 'j\'ai été racketté-e',
         trigger: '25'
     },
     {
@@ -180,7 +180,7 @@ const steps = [
     },
     {
         id: '26',
-        messages: 'je me suis fait voler',
+        message: 'je me suis fait voler',
         trigger: '27'
     },
     {
@@ -195,12 +195,12 @@ const steps = [
     },
     {
         id: '28',
-        messages: 'Quelles sont les choses que tu as faites au cours des 12 derniers mois?',
+        message: 'Quelles sont les choses que tu as faites au cours des 12 derniers mois?',
         trigger: '29'
     },
     {
         id: '29',
-        messages: 'j\'ai courbé, séché l\'école, fait l\'école buissonnière',
+        message: 'j\'ai courbé, séché l\'école, fait l\'école buissonnière',
         trigger: '30'
     },
     {
@@ -215,7 +215,7 @@ const steps = [
     },
     {
         id: '31',
-        messages: 'j\'ai pris une arme (couteau, matraque, etc) pour aller à l\'école',
+        message: 'j\'ai pris une arme (couteau, matraque, etc) pour aller à l\'école',
         trigger: '32'
     },
     {
@@ -230,7 +230,7 @@ const steps = [
     },
     {
         id: '33',
-        messages: 'j\'ai frappé un ou une camarade d\'école',
+        message: 'j\'ai frappé un ou une camarade d\'école',
         trigger: '34'
     },
     {
@@ -245,7 +245,7 @@ const steps = [
     },
     {
         id: '35',
-        messages: 'j\ai menacé un ou une camarade d\'école',
+        message: 'j\ai menacé un ou une camarade d\'école',
         trigger: '36'
     },
     {
@@ -260,7 +260,7 @@ const steps = [
     },
     {
         id: '37',
-        messages: 'j\ai racketté un ou une camarade d\'école',
+        message: 'j\ai racketté un ou une camarade d\'école',
         trigger: '38'
     },
     {
@@ -275,7 +275,7 @@ const steps = [
     },
     {
         id: '39',
-        messages: 'par colère ou par plaisir, j\'ai abîmé, cassl, détruit quelque chose qui ne m\'appartenait pas',
+        message: 'par colère ou par plaisir, j\'ai abîmé, cassl, détruit quelque chose qui ne m\'appartenait pas',
         trigger: '40'
     },
     {
@@ -290,12 +290,12 @@ const steps = [
     },
     {
         id: '41',
-        messages: 'Indique à quel point tu es d\'accord ou non avec cette afirmation',
+        message: 'Indique à quel point tu es d\'accord ou non avec cette afirmation',
         trigger: '42'
     },
     {
         id: '42',
-        messages: 'je peux parler de mes problèmes avec mes ami-e-s',
+        message: 'je peux parler de mes problèmes avec mes ami-e-s',
         trigger: '43'
     },
     {
@@ -310,7 +310,7 @@ const steps = [
     },
     {
         id: '44',
-        messages: 'je peux parler de mes problèmes avec ma famille',
+        message: 'je peux parler de mes problèmes avec ma famille',
         trigger: '45'
     },
     {
@@ -325,7 +325,7 @@ const steps = [
     },
     {
         id: '46',
-        messages: 'je peux parler de mes problèmes avec mon enseignant-e',
+        message: 'je peux parler de mes problèmes avec mon enseignant-e',
         trigger: '47'
     },
     {
@@ -340,7 +340,7 @@ const steps = [
     },
     {
         id: '48',
-        messages: 'je peux parler de mes problèmes avec un-e autre adulte de l\'école, médiateur/trice, infirmier/ière, directeur/trice, psychologue, concierge',
+        message: 'je peux parler de mes problèmes avec un-e autre adulte de l\'école, médiateur/trice, infirmier/ière, directeur/trice, psychologue, concierge',
         trigger: '49'
     },
     {
@@ -355,21 +355,21 @@ const steps = [
     },
     {
         id: '50',
-        messages: 'Où te trouves-tu avec un nombre entre 1 et 10, si tu considères ta vie actuelle? 10 signifie la meilleure vie possible pour toi, 1 signifie la plus mauvaise vie possible pour toi.',
+        message: 'Où te trouves-tu avec un nombre entre 1 et 10, si tu considères ta vie actuelle? 10 signifie la meilleure vie possible pour toi, 1 signifie la plus mauvaise vie possible pour toi.',
         trigger: '51'
     },
     {
         id: '51',
         user: true,
         inputAttributes: {
-            keyboardType: 'number-pad'
+            keyboardType: 'default'
         },
         trigger: '52'
     },
     {
         id: '52',
         end: true,
-        messages: "Merci beaucoup pour ton temps."
+        message: "Merci beaucoup pour ton temps."
     }
   ];
 
