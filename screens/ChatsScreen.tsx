@@ -8,7 +8,7 @@ import ChatBotSteps from '../constants/ChatBotSteps'
 
 export default function ChatsScreen() {
   return (
-    <ChatBot steps={ChatBotSteps.steps} />
+    <ChatBot steps={ChatBotSteps.steps} userDelay={100} botDelay={2000}/>
   );
 }
 
