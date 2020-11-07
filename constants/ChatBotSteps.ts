@@ -80,9 +80,297 @@ const steps = [
     },
     {
         id: '12',
-        message: 'merci',
-        end:true
+        message: 'Au cours des derniers mois, combien de fois as-tu été embêté-e ou brimé-e des façons suivantes ?',
+        trigger: '13',
     },
+    {
+        id: '13',
+        message: 'quelqu\'un m\'a envoyé des messages instantanés, des posts sur mon mur, des e mails ou des sms méchants ou a créé un site internet qui se moquait de moi',
+        trigger: '14',
+    },
+    {
+        id: '14',
+        options: [
+            { label : 'plusieurs fois par semaine', value: 1, trigger: '15'},
+            { label : 'une fois par semaine', value: 2, trigger: '15'},
+            { label : '2 ou 3 fois par mois', value: 3, trigger: '15'},
+            { label : 'une ou deux fois', value: 4, trigger: '15'},
+            { label : 'jamais', value: 5, trigger: '15'}
+        ]
+    },
+    {
+        id: '15',
+        message: 'quelqu\'un a pris des photos de moi peu flatteuses ou inappropriées sans ma permission et les a mises en ligne',
+        trigger: '16'
+    },
+    {
+        id: '16',
+        options: [
+            { label : 'plusieurs fois par semaine', value: 1, trigger: '17'},
+            { label : 'une fois par semaine', value: 2, trigger: '17'},
+            { label : '2 ou 3 fois par mois', value: 3, trigger: '17'},
+            { label : 'une ou deux fois', value: 4, trigger: '17'},
+            { label : 'jamais', value: 5, trigger: '17'}
+        ]
+    },
+    {
+        id: '17',
+        message: 'Au cours des 12 derniers mois, laquelle ou lesquelles de ces situations as-tu vécues à l\'école ?',
+        trigger: '18',
+    },
+    {
+        id: '18',
+        messages: 'certaines de mes affaires ont été abîmées, cassées, détruites',
+        trigger: '19'
+    },
+    {
+        id: '19',
+        options: [
+            { label : 'plusieurs fois par semaine', value: 1, trigger: '20'},
+            { label : 'une fois par semaine', value: 2, trigger: '20'},
+            { label : 'une fois par mois', value: 3, trigger: '20'},
+            { label : 'une ou deux fois', value: 4, trigger: '20'},
+            { label : 'jamais', value: 5, trigger: '20'}
+        ]
+    },
+    {
+        id: '20',
+        messages: 'je me suis fait frapper',
+        trigger: '21'
+    },
+    {
+        id: '21',
+        options: [
+            { label : 'plusieurs fois par semaine', value: 1, trigger: '22'},
+            { label : 'une fois par semaine', value: 2, trigger: '22'},
+            { label : 'une fois par mois', value: 3, trigger: '22'},
+            { label : 'une ou deux fois', value: 4, trigger: '22'},
+            { label : 'jamais', value: 5, trigger: '22'}
+        ]
+    },
+    {
+        id: '22',
+        messages: 'je me suis fait menacer',
+        trigger: '23'
+    },
+    {
+        id: '23',
+        options: [
+            { label : 'plusieurs fois par semaine', value: 1, trigger: '24'},
+            { label : 'une fois par semaine', value: 2, trigger: '24'},
+            { label : 'une fois par mois', value: 3, trigger: '24'},
+            { label : 'une ou deux fois', value: 4, trigger: '24'},
+            { label : 'jamais', value: 5, trigger: '24'}
+        ]
+    },
+    {
+        id: '24',
+        messages: 'j\'ai été racketté-e',
+        trigger: '25'
+    },
+    {
+        id: '25',
+        options: [
+            { label : 'plusieurs fois par semaine', value: 1, trigger: '26'},
+            { label : 'une fois par semaine', value: 2, trigger: '26'},
+            { label : 'une fois par mois', value: 3, trigger: '26'},
+            { label : 'une ou deux fois', value: 4, trigger: '26'},
+            { label : 'jamais', value: 5, trigger: '26'}
+        ]
+    },
+    {
+        id: '26',
+        messages: 'je me suis fait voler',
+        trigger: '27'
+    },
+    {
+        id: '27',
+        options: [
+            { label : 'plusieurs fois par semaine', value: 1, trigger: '28'},
+            { label : 'une fois par semaine', value: 2, trigger: '28'},
+            { label : 'une fois par mois', value: 3, trigger: '28'},
+            { label : 'une ou deux fois', value: 4, trigger: '28'},
+            { label : 'jamais', value: 5, trigger: '28'}
+        ]
+    },
+    {
+        id: '28',
+        messages: 'Quelles sont les choses que tu as faites au cours des 12 derniers mois?',
+        trigger: '29'
+    },
+    {
+        id: '29',
+        messages: 'j\'ai courbé, séché l\'école, fait l\'école buissonnière',
+        trigger: '30'
+    },
+    {
+        id: '30',
+        options: [
+            { label : 'plusieurs fois par semaine', value: 1, trigger: '31'},
+            { label : 'une fois par semaine', value: 2, trigger: '31'},
+            { label : 'une fois par mois', value: 3, trigger: '31'},
+            { label : 'une ou deux fois', value: 4, trigger: '31'},
+            { label : 'jamais', value: 5, trigger: '31'}
+        ]
+    },
+    {
+        id: '31',
+        messages: 'j\'ai pris une arme (couteau, matraque, etc) pour aller à l\'école',
+        trigger: '32'
+    },
+    {
+        id: '32',
+        options: [
+            { label : 'plusieurs fois par semaine', value: 1, trigger: '33'},
+            { label : 'une fois par semaine', value: 2, trigger: '33'},
+            { label : 'une fois par mois', value: 3, trigger: '33'},
+            { label : 'une ou deux fois', value: 4, trigger: '33'},
+            { label : 'jamais', value: 5, trigger: '33'}
+        ]
+    },
+    {
+        id: '33',
+        messages: 'j\'ai frappé un ou une camarade d\'école',
+        trigger: '34'
+    },
+    {
+        id: '34',
+        options: [
+            { label : 'plusieurs fois par semaine', value: 1, trigger: '35'},
+            { label : 'une fois par semaine', value: 2, trigger: '35'},
+            { label : 'une fois par mois', value: 3, trigger: '35'},
+            { label : 'une ou deux fois', value: 4, trigger: '35'},
+            { label : 'jamais', value: 5, trigger: '35'}
+        ]
+    },
+    {
+        id: '35',
+        messages: 'j\ai menacé un ou une camarade d\'école',
+        trigger: '36'
+    },
+    {
+        id: '36',
+        options: [
+            { label : 'plusieurs fois par semaine', value: 1, trigger: '37'},
+            { label : 'une fois par semaine', value: 2, trigger: '37'},
+            { label : 'une fois par mois', value: 3, trigger: '37'},
+            { label : 'une ou deux fois', value: 4, trigger: '37'},
+            { label : 'jamais', value: 5, trigger: '37'}
+        ]
+    },
+    {
+        id: '37',
+        messages: 'j\ai racketté un ou une camarade d\'école',
+        trigger: '38'
+    },
+    {
+        id: '38',
+        options: [
+            { label : 'plusieurs fois par semaine', value: 1, trigger: '39'},
+            { label : 'une fois par semaine', value: 2, trigger: '39'},
+            { label : 'une fois par mois', value: 3, trigger: '39'},
+            { label : 'une ou deux fois', value: 4, trigger: '39'},
+            { label : 'jamais', value: 5, trigger: '39'}
+        ]
+    },
+    {
+        id: '39',
+        messages: 'par colère ou par plaisir, j\'ai abîmé, cassl, détruit quelque chose qui ne m\'appartenait pas',
+        trigger: '40'
+    },
+    {
+        id: '40',
+        options: [
+            { label : 'plusieurs fois par semaine', value: 1, trigger: '41'},
+            { label : 'une fois par semaine', value: 2, trigger: '41'},
+            { label : 'une fois par mois', value: 3, trigger: '41'},
+            { label : 'une ou deux fois', value: 4, trigger: '41'},
+            { label : 'jamais', value: 5, trigger: '41'}
+        ]
+    },
+    {
+        id: '41',
+        messages: 'Indique à quel point tu es d\'accord ou non avec cette afirmation',
+        trigger: '42'
+    },
+    {
+        id: '42',
+        messages: 'je peux parler de mes problèmes avec mes ami-e-s',
+        trigger: '43'
+    },
+    {
+        id: '43',
+        options: [
+            { label : 'pas du tout d\'accord', value: 1, trigger: '44'},
+            { label : 'plutôt pas d\'accord', value: 2, trigger: '44'},
+            { label : 'ni l\'un ni l\'autre', value: 3, trigger: '44'},
+            { label : 'plutôt d\'accord', value: 4, trigger: '44'},
+            { label : 'tout à fait d\'accord', value: 5, trigger: '44'}
+        ]
+    },
+    {
+        id: '44',
+        messages: 'je peux parler de mes problèmes avec ma famille',
+        trigger: '45'
+    },
+    {
+        id: '45',
+        options: [
+            { label : 'pas du tout d\'accord', value: 1, trigger: '46'},
+            { label : 'plutôt pas d\'accord', value: 2, trigger: '46'},
+            { label : 'ni l\'un ni l\'autre', value: 3, trigger: '46'},
+            { label : 'plutôt d\'accord', value: 4, trigger: '46'},
+            { label : 'tout à fait d\'accord', value: 5, trigger: '46'}
+        ]
+    },
+    {
+        id: '46',
+        messages: 'je peux parler de mes problèmes avec mon enseignant-e',
+        trigger: '47'
+    },
+    {
+        id: '47',
+        options: [
+            { label : 'pas du tout d\'accord', value: 1, trigger: '48'},
+            { label : 'plutôt pas d\'accord', value: 2, trigger: '48'},
+            { label : 'ni l\'un ni l\'autre', value: 3, trigger: '48'},
+            { label : 'plutôt d\'accord', value: 4, trigger: '48'},
+            { label : 'tout à fait d\'accord', value: 5, trigger: '48'}
+        ]
+    },
+    {
+        id: '48',
+        messages: 'je peux parler de mes problèmes avec un-e autre adulte de l\'école, médiateur/trice, infirmier/ière, directeur/trice, psychologue, concierge',
+        trigger: '49'
+    },
+    {
+        id: '49',
+        options: [
+            { label : 'pas du tout d\'accord', value: 1, trigger: '50'},
+            { label : 'plutôt pas d\'accord', value: 2, trigger: '50'},
+            { label : 'ni l\'un ni l\'autre', value: 3, trigger: '50'},
+            { label : 'plutôt d\'accord', value: 4, trigger: '50'},
+            { label : 'tout à fait d\'accord', value: 5, trigger: '50'}
+        ]
+    },
+    {
+        id: '50',
+        messages: 'Où te trouves-tu avec un nombre entre 1 et 10, si tu considères ta vie actuelle? 10 signifie la meilleure vie possible pour toi, 1 signifie la plus mauvaise vie possible pour toi.',
+        trigger: '51'
+    },
+    {
+        id: '51',
+        user: true,
+        inputAttributes: {
+            keyboardType: 'number-pad'
+        },
+        trigger: '52'
+    },
+    {
+        id: '52',
+        end: true,
+        messages: "Merci beaucoup pour ton temps."
+    }
   ];
 
 export default {
