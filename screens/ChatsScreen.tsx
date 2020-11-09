@@ -8,23 +8,6 @@ import ChatBotSteps from '../constants/ChatBotSteps'
 
 export default function ChatsScreen() {
   return (
-    <ChatBot steps={ChatBotSteps.steps} userDelay={100} botDelay={2000}/>
+    <ChatBot steps={ChatBotSteps.steps} userDelay={100} botDelay={2000} optionBubbleColor='#F00'/>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
