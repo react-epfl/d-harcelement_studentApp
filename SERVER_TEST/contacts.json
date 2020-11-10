@@ -1,0 +1,37 @@
+[
+    {
+        "id": 0,
+        "name": "Police",
+        "phone_number": "117",
+        "image": "https://picsum.photos/200",
+        "priority": 100
+    },
+    {
+        "id": 1,
+        "name": "Ligne consultation pour les jeunes",
+        "phone_number": "147",
+        "image": "https://picsum.photos/200",
+        "priority": 100
+    },
+    {
+        "id": 2,
+        "name": "La Main Tendue",
+        "phone_number": "143",
+        "image": "https://picsum.photos/200",
+        "priority": 90
+    },
+    {
+        "id": 3,
+        "name": "Urgences",
+        "phone_number": "144",
+        "image": "https://picsum.photos/200",
+        "priority": 80
+    },
+    {
+        "id": 4,
+        "name": "Test Sven",
+        "phone_number": "0786268658",
+        "image": "https://picsum.photos/200",
+        "priority": 1
+    }
+]
