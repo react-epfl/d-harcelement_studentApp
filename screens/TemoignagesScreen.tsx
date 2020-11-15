@@ -68,17 +68,6 @@ export default function TemoignagesScreen({ navigation, route }) {
             <Text style={styles.listitemdatetime}>{item.datetime}</Text>
           </View>
         </View>
-
-        {/* icon vote unvote */}
-        <View style={{flex: 1, flexDirection: 'column', alignContent: 'center'}}>
-          <Button
-            icon={
-              <Ionicons name="ios-ribbon" size={24} color={item.voted ? '#A00' : '#EEE'} />
-            }
-            type="clear"
-            onPress = {() => itemVoted(item.id)}
-            />
-        </View>
       </View>
     </TouchableOpacity>
   );
