@@ -41,7 +41,8 @@ const steps = [
             { label: '2 fois', value: 3, trigger: '7'},
             { label: '3 fois', value: 4, trigger: '7'},
             { label: '4 fois ou plus', value: 5, trigger: '7'}
-        ]
+        ],
+        end: true
     },
     {
         id: '7',
