@@ -1,15 +1,39 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Switch, Button, Alert} from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
+import { SettingsScreen, SettingsData, Chevron  } from "react-native-settings-screen"
 
 export default function ParametresScreen() {
+  const data: SettingsData = [
+    {
+      type: 'SECTION',
+      header: 'Paramètres principaux'.toUpperCase(),
+      footer: 'd-harcelement-app - REACT Lab',
+      rows: [
+        {
+          title: 'hello',
+          showDisclosureIndicator: true
+        },
+        {
+          title: 's',
+          renderAccessory: () => <Switch value onValueChange={() => {}} />,
+        },
+        {
+          title: 'Supprimer les données',
+          titleStyle: {
+            color: 'red',
+          },
+          renderAccessory: () => <Button title='Supprimer' color='#F00' onPress={() => Alert.alert('Données supprimées')} />
+        }
+      ]
+    }
+  ];
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Paramètres</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/ParametresScreen.tsx" />
+      <SettingsScreen data={data} />
     </View>
   );
 }
@@ -19,14 +43,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
+  }
 });
