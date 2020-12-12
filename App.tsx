@@ -1,12 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Alert, Modal, View, Text } from 'react-native'
+import { Alert, Modal, View, Text, StyleSheet, Button } from 'react-native'
 
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import {
+  CodeField,
+  Cursor,
+  useBlurOnFulfill,
+  useClearByFocusCell,
+} from 'react-native-confirmation-code-field';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -45,6 +52,25 @@ export default function App() {
   }
 
   checkIfNeedEnterSchoolId()
+
+
+  const CELL_COUNT = 4;
+
+  const [value, setValue] = useState('');
+  const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
+  const [props, getCellOnLayoutHandler] = useClearByFocusCell({
+    value,
+    setValue,
+  });
+
+  useEffect(() => {
+    console.log(value.length == CELL_COUNT)
+    if(value.length == CELL_COUNT){
+      storeData(value);
+      setModalState(false)
+      setValue('')
+    }
+  }, [value])
   
 
 
@@ -55,7 +81,7 @@ export default function App() {
       <SafeAreaProvider>
         <Navigation colorScheme={colorScheme} />
         <StatusBar />
-        <View style={{marginTop: 22}}>
+        <View>
           <Modal
             animationType="slide"
             transparent={false}
@@ -63,10 +89,26 @@ export default function App() {
             onRequestClose={() => {
               Alert.alert('Modal has been closed.');
             }}>
-            <View style={{marginTop: 22}}>
-              <View>
-                <Text>Hello World!</Text>
-              </View>
+            <View style={styles.root}>
+              <Text style={styles.title}>Code Ecole</Text>
+              <CodeField
+                ref={ref}
+                {...props}
+                value={value}
+                onChangeText={setValue}
+                cellCount={CELL_COUNT}
+                rootStyle={styles.codeFieldRoot}
+                keyboardType="number-pad"
+                textContentType="oneTimeCode"
+                renderCell={({index, symbol, isFocused}) => (
+                  <Text
+                    key={index}
+                    style={[styles.cell, isFocused && styles.focusCell]}
+                    onLayout={getCellOnLayoutHandler(index)}>
+                    {symbol || (isFocused ? <Cursor /> : null)}
+                  </Text>
+                )}
+              />
             </View>
           </Modal>
         </View>
@@ -74,3 +116,21 @@ export default function App() {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  root: {flex: 1, padding: 20},
+  title: {textAlign: 'center', fontSize: 30},
+  codeFieldRoot: {marginTop: 20},
+  cell: {
+    width: 40,
+    height: 40,
+    lineHeight: 38,
+    fontSize: 24,
+    borderWidth: 2,
+    borderColor: '#00000030',
+    textAlign: 'center',
+  },
+  focusCell: {
+    borderColor: '#000',
+  },
+});
