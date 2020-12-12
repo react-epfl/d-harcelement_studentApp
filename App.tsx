@@ -7,6 +7,7 @@ import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { BarCodeScanner } from 'expo-barcode-scanner';
 
 import {
   CodeField,
@@ -48,7 +49,6 @@ export default function App() {
     else{
       setModalState(false)
     }
-    console.log(value)
   }
 
   checkIfNeedEnterSchoolId()
@@ -71,6 +71,20 @@ export default function App() {
       setValue('')
     }
   }, [value])
+
+  const [hasPermission, setHasPermission] = useState(null);
+  const [scanned, setScanned] = useState(false);
+  useEffect(() => {
+    (async () => {
+      const { status } = await BarCodeScanner.requestPermissionsAsync();
+      setHasPermission(status === 'granted');
+    })();
+  }, []);
+
+  const handleBarCodeScanned = ({ type, data }) => {
+    setScanned(true);
+    setValue(data)
+  };
   
 
 
@@ -108,6 +122,10 @@ export default function App() {
                     {symbol || (isFocused ? <Cursor /> : null)}
                   </Text>
                 )}
+              />
+              <BarCodeScanner
+                onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+                style={{flex:1, margin:20}}
               />
             </View>
           </Modal>

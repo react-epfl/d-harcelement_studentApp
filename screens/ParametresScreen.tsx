@@ -5,11 +5,9 @@ import { StyleSheet, Switch, Button, Alert} from 'react-native';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { SettingsScreen, SettingsData, Chevron  } from "react-native-settings-screen"
-import DropDownPicker from 'react-native-dropdown-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ParametresScreen() {
-  
   
   const clearAsyncStorage = async() => {
     try{
@@ -21,11 +19,39 @@ export default function ParametresScreen() {
     Alert.alert('Données supprimées')
   }
 
+  const getSchoolData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@school_id')
+      return value
+
+    } catch(e) {
+      console.error(e)
+      return ''
+    }
+  }
+
+  const [schoolid, setSchoolid] = useState('')
+
+  const setupSchoolId = async () => {
+    let id = await getSchoolData()
+    setSchoolid(id ? id : '')
+  }
+
+  setupSchoolId()
+
   const data: SettingsData = [
     {
       type: 'SECTION',
       header: 'Paramètres généraux'.toUpperCase(),
       rows: [
+        {
+          title: 'Numéro d\'école',
+          renderAccessory: () => (
+            <Text style={{ color: '#999', marginRight: 6, fontSize: 18 }}>
+              {schoolid}
+            </Text>
+          ),         
+        },
         {
           title: 'Supprimer les données',
           titleStyle: {
