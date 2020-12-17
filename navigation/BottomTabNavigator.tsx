@@ -96,6 +96,9 @@ function ChatsNavigator() {
       <ChatsStack.Screen
         name="ChatViewScreen"
         component={ChatViewScreen}
+        options={{ 
+          headerTitle: 'Discussion'
+        }}
       />
     </ChatsStack.Navigator>
   );

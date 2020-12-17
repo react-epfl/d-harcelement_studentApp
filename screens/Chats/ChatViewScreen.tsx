@@ -22,9 +22,7 @@ export default function ChatViewScreen({ route, navigation}) {
   if (id == 1){
     return (
       <SafeAreaView style={styles.maincontainer}>
-        <ScrollView style={styles.scrollview} contentContainerStyle={{ flexGrow: 1 }}>
           <ChatBot steps={ChatBotSteps.steps} userDelay={100} botDelay={2000} optionBubbleColor='#F00' cache={true} handleEnd={func_end}/>
-        </ScrollView>
       </SafeAreaView>
     );
   }
