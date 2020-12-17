@@ -45,13 +45,13 @@ export default function App() {
     let value = await getData('@school_id');
     if (value === null) {
       setModalState(true)
+      console.log("open")
     }
     else{
       setModalState(false)
     }
   }
 
-  checkIfNeedEnterSchoolId()
 
 
   const CELL_COUNT = 4;
@@ -88,8 +88,44 @@ export default function App() {
 
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
-  const unlockedViews = (
-    <SafeAreaProvider>
+
+  const [locked, setLocked] = useState(true);
+  const [appState, SetAppState] = useState(AppState.currentState);
+
+  const localAuth = () => {
+    authenticateAsync({
+      promptMessage: 'Unlock to access app',
+    }).then(({ success }) => {
+      if (success) {
+        setLocked(false);
+        checkIfNeedEnterSchoolId()
+      }
+    });
+  }
+
+  useEffect(() => {
+    if(locked == true && AppState.currentState == 'active') {
+      localAuth();
+    }
+  }, [locked, appState]);
+
+  const _handleAppStateChange = async (nextAppState) => {
+    if(!locked) {
+      if(nextAppState === 'inactive' || nextAppState === 'background') {
+        setLocked(true);
+      }
+    }
+    SetAppState(nextAppState);
+  };
+
+
+  AppState.addEventListener('change', _handleAppStateChange);
+
+  if (!isLoadingComplete || locked) {
+    return null;
+  } else {
+    return(
+      <SafeAreaProvider>
       <Navigation colorScheme={colorScheme} />
       <StatusBar />
       <View>
@@ -128,53 +164,7 @@ export default function App() {
         </Modal>
       </View>
     </SafeAreaProvider>
-  );
-
-  const lockedViews = (
-    <SafeAreaProvider>
-      <Navigation colorScheme={colorScheme} />
-      <StatusBar />
-    </SafeAreaProvider>
-  );
-
-  const [locked, setLocked] = useState(true);
-  const [appState, SetAppState] = useState(AppState.currentState);
-  const [mainView, setMainView] = useState(lockedViews);
-
-  const localAuth = () => {
-    authenticateAsync({
-      promptMessage: 'Unlock to access app',
-    }).then(({ success }) => {
-      if (success) {
-        setLocked(false);
-        setMainView(unlockedViews);
-      }
-    });
-  }
-
-  useEffect(() => {
-    if(locked == true && AppState.currentState == 'active') {
-      localAuth();
-    }
-  }, [locked, appState]);
-
-  const _handleAppStateChange = async (nextAppState) => {
-    if(!locked) {
-      if(nextAppState === 'inactive' || nextAppState === 'background') {
-        setLocked(true);
-        setMainView(lockedViews);
-      }
-    }
-    SetAppState(nextAppState);
-  };
-
-
-  AppState.addEventListener('change', _handleAppStateChange);
-
-  if (!isLoadingComplete || locked) {
-    return null;
-  } else {
-    return mainView;
+    )
   }
 }
 
