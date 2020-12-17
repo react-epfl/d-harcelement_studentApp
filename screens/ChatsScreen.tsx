@@ -1,24 +1,17 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
-import ChatBot from 'react-native-chatbot';
-import ChatBotSteps from '../constants/ChatBotSteps'
 
-
-const func_end = (json) => {
-  var rendered_steps = json['renderedSteps'];
-  var steps = json['steps'];
-  var values = json['values'];
-}
+import Colors from '../constants/Colors';
 
 import * as Notifications from 'expo-notifications';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
-export default function ChatsScreen() {
+export default function ChatsScreen({ navigation }) {
   const storeData = async (id, value) => {
     try {
       await AsyncStorage.setItem(id, value)
@@ -62,7 +55,107 @@ export default function ChatsScreen() {
   setupNotifications();
 
 
+  const FlatListItemSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: "100%",
+          backgroundColor: "#AAA",
+        }}
+      />
+    );
+  }
+  const chats_data = [
+    {
+      id: 1,
+      name: 'Chatbot'
+    },
+    {
+      id: 2,
+      name: 'Professeur X'
+    },
+    {
+      id: 3,
+      name: 'Police'
+    },
+    {
+      id: 4,
+      name: 'Professeur Y'
+    },
+    {
+      id: 5,
+      name: 'Professeur Z'
+    },
+    {
+      id: 6,
+      name: 'Professeur A'
+    },
+  ];
+
+  const renderItem = ({ item }) => (
+    <TouchableOpacity 
+      key={item.id.toString()}
+      onPress={() => navigation.push('ChatViewScreen', {
+        id: item.id,
+        name: item.name
+      })}
+      >
+      <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+        <Text style={styles.item}>{item.name}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+
   return (
-    <ChatBot steps={ChatBotSteps.steps} userDelay={100} botDelay={2000} optionBubbleColor='#F00' cache={true} handleEnd={func_end}/>
+    <View style={styles.container}>     
+      <ScrollView style={{flex: 1, width: '100%',}} contentContainerStyle={{ flexGrow: 1 }}>
+      <FlatList
+        style={styles.flatlist}
+        data={chats_data}
+        ItemSeparatorComponent = { FlatListItemSeparator }
+        renderItem={ renderItem }
+        keyExtractor={item => item.id.toString()}
+      />
+      </ScrollView>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  item: {
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  title: {
+    flex: 1,
+    fontSize: 32,
+  },
+  flatlist: {
+    width: '100%',
+  },
+  listitemcontent: {
+    padding: 10,
+    flex: 1,
+    fontSize: 18,
+  },
+  listitemlocation: {
+    padding: 10,
+    color: Colors.fadedcolor,
+  },
+  listitemdatetime: {
+    padding: 10,
+    color: Colors.fadedcolor,
+  },
+  separator: {
+    marginVertical: 10,
+    height: 1,
+    width: '100%',
+  },
+});

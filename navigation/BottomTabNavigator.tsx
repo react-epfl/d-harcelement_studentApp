@@ -6,6 +6,7 @@ import * as React from 'react';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ChatsScreen from '../screens/ChatsScreen';
+import ChatViewScreen from '../screens/Chats/ChatViewScreen';
 import TemoignagesScreen from '../screens/TemoignagesScreen';
 import TemoignageCreateScreen from '../screens/Temoignages/TemoignageCreateScreen';
 import TemoignageViewScreen from '../screens/Temoignages/TemoignageViewScreen';
@@ -91,6 +92,10 @@ function ChatsNavigator() {
         options={{ 
           headerTitle: 'Chats'
         }}
+      />
+      <ChatsStack.Screen
+        name="ChatViewScreen"
+        component={ChatViewScreen}
       />
     </ChatsStack.Navigator>
   );

@@ -68,6 +68,7 @@ export default function ParametresScreen() {
     let v = await getData('@notif_delay');
     setNotifValue(v ? v : '0');
   }
+  setupNotifValue();
   const setupNotifications = async (val) => {
     setNotifValue(val);
     
