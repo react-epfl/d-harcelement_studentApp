@@ -38,7 +38,7 @@ export default function BottomTabNavigator() {
         name="Contacts"
         component={ContactsNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-contacts" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-people" color={color} />,
         }}
       />
       <BottomTab.Screen

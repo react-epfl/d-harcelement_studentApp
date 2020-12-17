@@ -17,22 +17,24 @@ import {
 } from 'react-native-confirmation-code-field';
 
 export default function App() {
+
+
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
 
   const [modalState, setModalState] = useState(false)
 
-  const storeData = async (value) => {
+  const storeData = async (id, value) => {
     try {
-      await AsyncStorage.setItem('@school_id', value)
+      await AsyncStorage.setItem(id, value)
     } catch (e) {
       // saving error
     }
   }
 
-  const getData = async () => {
+  const getData = async (id) => {
     try {
-      const value = await AsyncStorage.getItem('@school_id')
+      const value = await AsyncStorage.getItem(id)
       return value
 
     } catch(e) {
@@ -42,7 +44,7 @@ export default function App() {
   }
 
   const checkIfNeedEnterSchoolId = async() => {
-    let value = await getData();
+    let value = await getData('@school_id');
     if (value === null) {
       setModalState(true)
     }
@@ -64,9 +66,8 @@ export default function App() {
   });
 
   useEffect(() => {
-    console.log(value.length == CELL_COUNT)
     if(value.length == CELL_COUNT){
-      storeData(value);
+      storeData('@school_id', value);
       setModalState(false)
       setValue('')
     }
@@ -84,8 +85,7 @@ export default function App() {
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     setValue(data)
-  };
-  
+  };  
 
 
   if (!isLoadingComplete) {
