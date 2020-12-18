@@ -35,6 +35,8 @@ export default function ParametresScreen() {
   const clearAsyncStorage = async() => {
     try{
       await AsyncStorage.removeItem('@school_id')
+      await AsyncStorage.removeItem('@avatar')
+      await Notifications.cancelAllScheduledNotificationsAsync()
     } catch(e){
       console.error(e);
     }
@@ -60,36 +62,28 @@ export default function ParametresScreen() {
   }
   setupSchoolId()
 
+  const [avatarValue, setAvatarValue] = useState('sarah.png')
+  const setupAvatarValue = async() => {
+    let v = await getData('@avatar');
+    setAvatarValue(v ? v : 'sarah.png')
+  }
+  setupAvatarValue();
 
+  const saveAvatarValue = async(val) => {
+    setAvatarValue(val);
+    await storeData('@avatar', val);
+  }
 
-
-  const [notifValue, setNotifValue] = useState('0');
-  const setupNotifValue = async() => {
+  const [notifValue, setNotifValue] = useState('3');
+  const setupNotifValue = async() => {   
     let v = await getData('@notif_delay');
-    setNotifValue(v ? v : '0');
+    setNotifValue(v ? v : String(60*5));
   }
   setupNotifValue();
+
   const setupNotifications = async (val) => {
     setNotifValue(val);
-    
-    let tim;
-    switch (val){
-      case "0":
-        tim = 60*60*24;
-        break;
-      case "1":
-        tim = 60*60*24*2;
-        break;
-      case "2":
-        tim = 60*60*24*7;
-        break;
-      case "3" :
-        tim = 60*5;
-        break;
-      default:
-        tim = 60*60*24;
-    }
-    await storeData('@notif_delay', tim)
+    await storeData('@notif_delay', String(val))
     
     await Notifications.cancelAllScheduledNotificationsAsync()
     await Notifications.scheduleNotificationAsync({
@@ -98,8 +92,8 @@ export default function ParametresScreen() {
         body: 'Cela fait longtemps que nous ne t\'avons pas vu.',
       },
       trigger: {
-        seconds: tim,
-        repeats: true
+        seconds: parseInt(val),
+        repeats: false
       }
     });
   }
@@ -118,18 +112,34 @@ export default function ParametresScreen() {
           ),         
         },
         {
+          title: 'Avatar',
+          renderAccessory: () => (
+            <Picker
+              selectedValue={avatarValue}
+              style={{height: 50, width:130}}
+              onValueChange={(itemValue, itemIndex) =>
+                saveAvatarValue(String(itemValue))
+              }>
+              <Picker.Item label="Sarah" value="sarah.png" />
+              <Picker.Item label="Tina" value="tina.png" />
+              <Picker.Item label='Arthur' value="arthur.png" />
+              <Picker.Item label='Lea' value="lea.png" />
+            </Picker>
+          ),
+        },
+        {
           title: 'Notifications',
           renderAccessory: () => (
             <Picker
               selectedValue={notifValue}
               style={{height: 50, width:130}}
               onValueChange={(itemValue, itemIndex) =>
-                setupNotifications(String(itemValue))
+                setupNotifications(itemValue)
               }>
-              <Picker.Item label="1 jour" value="0" />
-              <Picker.Item label="2 jours" value="1" />
-              <Picker.Item label='1 semaine' value="2" />
-              <Picker.Item label='5 minutes' value="3" />
+              <Picker.Item label="1 jour" value={String(60*60*24)} />
+              <Picker.Item label="2 jours" value={String(60*60*24*2)} />
+              <Picker.Item label='1 semaine' value={String(60*60*24*7)} />
+              <Picker.Item label='5 minutes' value={String(60*5)} />
             </Picker>
           ),
         },
