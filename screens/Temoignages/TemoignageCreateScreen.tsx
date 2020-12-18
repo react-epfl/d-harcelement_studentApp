@@ -9,6 +9,29 @@ import { Text, View } from '../../components/Themed';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 
+/* -- TRANSLATIONS -- */
+import * as Localization from 'expo-localization'
+import i18n from 'i18n-js'
+
+// Set the key-value pairs for the different languages supports
+i18n.translations = {
+    'en-US': 
+    {
+      EditTextPlaceholder: 'Write your temoignage',
+      CancelButton: 'Cancel',
+      SendButton: 'Send',
+    },
+    'fr-CH':
+    {
+      EditTextPlaceholder: 'Décrivez votre témoignage',
+      CancelButton: 'Annuler',
+      SendButton: 'Envoyer',
+    }
+}
+i18n.locale = Localization.locale;
+i18n.fallbacks = true;
+/* -- END TRANSLATIONS -- */
+
 export default function TemoignageCreateScreen() {
 
   const navigation = useNavigation();
@@ -25,7 +48,7 @@ export default function TemoignageCreateScreen() {
               <View style={{flex: 2}}>
                 <TextInput
                   style={{ backgroundColor: '#EEE', width: '100%' , height: '100%'}}
-                  placeholder="Décrivez votre témoignage"
+                  placeholder={i18n.t('EditTextPlaceholder')}
                   editable
                   multiline
                   value={postText}
@@ -45,7 +68,7 @@ export default function TemoignageCreateScreen() {
                       size={25}
                     />
                   }
-                  title="Annuler"
+                  title={i18n.t('CancelButton')}
                   type="solid"
                   onPress={() => navigation.goBack() }
                   />
@@ -60,7 +83,7 @@ export default function TemoignageCreateScreen() {
                       size={25}
                     />
                   }
-                  title="Envoyer"
+                  title={i18n.t('SendButton')}
                   type="solid"
                   onPress={() => {
                     navigation.navigate('TemoignagesScreen', { content: postText, location: 'St-Prex', datetime: '2020-09-16'});

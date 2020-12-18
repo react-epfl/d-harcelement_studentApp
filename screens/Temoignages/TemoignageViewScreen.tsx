@@ -8,6 +8,24 @@ import { Text, View } from '../../components/Themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 
+/* -- TRANSLATIONS -- */
+import * as Localization from 'expo-localization'
+import i18n from 'i18n-js'
+
+// Set the key-value pairs for the different languages supports
+i18n.translations = {
+    'en-US': 
+    {
+      OKButton: 'OK'
+    },
+    'fr-CH':
+    {
+    }
+}
+i18n.locale = Localization.locale;
+i18n.fallbacks = true;
+/* -- END TRANSLATIONS -- */
+
 
 export default function TemoignageViewScreen({ route, navigation}) {
   const { id } = route.params;
@@ -31,7 +49,7 @@ export default function TemoignageViewScreen({ route, navigation}) {
 
           <Button
             style={styles.button}
-            title="OK"
+            title={i18n.t('OKButton')}
             type="solid"
             onPress={() => navigation.goBack() }
             />    

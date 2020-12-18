@@ -1,15 +1,8 @@
 import * as React from 'react';
-import { useState } from 'react';
 import { StyleSheet, TextInput, ScrollView, Image } from 'react-native';
-import { Button } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import Colors from '../../constants/Colors';
-import { Text, View } from '../../components/Themed';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
 import ChatBot from 'react-native-chatbot';
-import ChatBotSteps from '../../constants/ChatBotSteps'
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import ChatBotSteps from '../../constants/ChatBotSteps';
 
 
 export default function ChatViewScreen({ route, navigation}) {

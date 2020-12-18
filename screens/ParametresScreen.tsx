@@ -9,6 +9,43 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notifications from 'expo-notifications';
 import {Picker} from '@react-native-picker/picker';
 
+/* -- TRANSLATIONS -- */
+import * as Localization from 'expo-localization'
+import i18n from 'i18n-js'
+
+// Set the key-value pairs for the different languages supports
+i18n.translations = {
+    'en-US': 
+    {
+      AlertClearDataMessage: 'Data are erased',
+      SettingsHeader: 'General Settings',
+      SchoolNumber: 'School number',
+      AvatarSetting: 'Avatar',
+      NotificationsSetting: 'Notifications',
+      RemoveDataSetting: 'Delete data',
+      oneday: '1 day',
+      twoday: '2 days',
+      oneweek: '1 week',
+      fivemin: '5 minutes',
+      DeleteButton: 'Delete'
+    },
+    'fr-CH':
+    {
+      AlertClearDataMessage: 'Les données sont supprimées',
+      SettingsHeader: 'Paramètres généraux',
+      SchoolNumber: 'Numéro d\'école',
+      RemoveDataSetting: 'Supprimer les données',
+      oneday: '1 jour',
+      twoday: '2 jours',
+      oneweek: '1 semaine',
+      DeleteButton: 'Supprimer'
+    }
+}
+i18n.locale = Localization.locale;
+i18n.fallbacks = true;
+/* -- END TRANSLATIONS -- */
+
+
 export default function ParametresScreen() {
   
 
@@ -41,7 +78,7 @@ export default function ParametresScreen() {
       console.error(e);
     }
 
-    Alert.alert('Données supprimées')
+    Alert.alert(i18n.t('AlertClearDataMessage'))
   }
 
   const getSchoolData = async () => {
@@ -101,10 +138,10 @@ export default function ParametresScreen() {
   const data: SettingsData = [
     {
       type: 'SECTION',
-      header: 'Paramètres généraux'.toUpperCase(),
+      header: i18n.t('SettingsHeader').toUpperCase(),
       rows: [
         {
-          title: 'Numéro d\'école',
+          title: i18n.t('SchoolNumber'),
           renderAccessory: () => (
             <Text style={{ color: '#999', marginRight: 6, fontSize: 18 }}>
               {schoolid}
@@ -112,7 +149,7 @@ export default function ParametresScreen() {
           ),         
         },
         {
-          title: 'Avatar',
+          title: i18n.t('AvatarSetting'),
           renderAccessory: () => (
             <Picker
               selectedValue={avatarValue}
@@ -128,7 +165,7 @@ export default function ParametresScreen() {
           ),
         },
         {
-          title: 'Notifications',
+          title: i18n.t('NotificationsSetting'),
           renderAccessory: () => (
             <Picker
               selectedValue={notifValue}
@@ -136,19 +173,19 @@ export default function ParametresScreen() {
               onValueChange={(itemValue, itemIndex) =>
                 setupNotifications(itemValue)
               }>
-              <Picker.Item label="1 jour" value={String(60*60*24)} />
-              <Picker.Item label="2 jours" value={String(60*60*24*2)} />
-              <Picker.Item label='1 semaine' value={String(60*60*24*7)} />
-              <Picker.Item label='5 minutes' value={String(60*5)} />
+              <Picker.Item label={i18n.t('oneday')} value={String(60*60*24)} />
+              <Picker.Item label={i18n.t('twoday')} value={String(60*60*24*2)} />
+              <Picker.Item label={i18n.t('oneweek')} value={String(60*60*24*7)} />
+              <Picker.Item label={i18n.t('fivemin')} value={String(60*5)} />
             </Picker>
           ),
         },
         {
-          title: 'Supprimer les données',
+          title: i18n.t('RemoveDataSetting'),
           titleStyle: {
             color: 'red',
           },
-          renderAccessory: () => <Button title='Supprimer' color='#F00' onPress={clearAsyncStorage} />
+          renderAccessory: () => <Button title={i18n.t('DeleteButton')} color='#F00' onPress={clearAsyncStorage} />
         }
       ]
     },

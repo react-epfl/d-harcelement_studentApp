@@ -99,6 +99,8 @@ export default function ChatsScreen({ navigation }) {
       />
     );
   }
+
+  // This should come from the website as a JSON file.
   const chats_data = [
     {
       id: 1,
@@ -106,7 +108,7 @@ export default function ChatsScreen({ navigation }) {
     },
     {
       id: 2,
-      name: 'Professeur X'
+      name: 'Professeur Martin Vetterli'
     },
     {
       id: 3,

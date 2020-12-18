@@ -18,8 +18,44 @@ import { BottomTabParamList, ChatsParamList, TemoignagesParamList, ContactsParam
 import { Button } from 'react-native-elements';
 import { StyleSheet } from 'react-native';
 
-import iconSet from '@expo/vector-icons/build/Fontisto';
-import Navigation from '.';
+/* -- TRANSLATIONS -- */
+import * as Localization from 'expo-localization'
+import i18n from 'i18n-js'
+
+// Set the key-value pairs for the different languages supports
+i18n.translations = {
+    'en-US': 
+    {
+      BottomChatTab: 'Chats',
+      BottomTemoignageTab: 'Temoignages',
+      BottomContactsTab: 'Contacts',
+      BottomSettingsTab: 'Settings',
+      ChatScreenTitle: 'Chat',
+      ChatViewScreenTitle: 'Discussion',
+      TemoignagesScreenTitle: 'Temoignages',
+      TemoignageCreateScreenTitle: 'New temoignage',
+      TemoignageViewScreenTitle: 'Temoignage',
+      ContactsScreenTitle: 'Contacts',
+      SettingsScreenTitle: 'Settings'
+    },
+    'fr-CH':
+    {
+      BottomChatTab: 'Chats',
+      BottomTemoignageTab: 'Témoignages',
+      BottomContactsTab: 'Contacts',
+      BottomSettingsTab: 'Paramètres',
+      ChatScreenTitle: 'Chat',
+      ChatViewScreenTitle: 'Discussion',
+      TemoignagesScreenTitle: 'Témoignages',
+      TemoignageCreateScreenTitle: 'Nouveau témoignage',
+      TemoignageViewScreenTitle: 'Témoignage',
+      ContactsScreenTitle: 'Contacts',
+      SettingsScreenTitle: 'Paramètres'
+    }
+}
+i18n.locale = Localization.locale;
+i18n.fallbacks = true;
+/* -- END TRANSLATIONS -- */
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -32,7 +68,7 @@ export default function BottomTabNavigator() {
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
       {/* Chat Stacks Start */}
       <BottomTab.Screen
-        name="Chats"
+        name={i18n.t('BottomChatTab')}
         component={ChatsNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-chatbubbles" color={color} />,
@@ -42,7 +78,7 @@ export default function BottomTabNavigator() {
 
       {/* Temoignage Stack Start */}
       <BottomTab.Screen
-        name="Témoignages"
+        name={i18n.t('BottomTemoignageTab')}
         component={TemoignagesNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-book" color={color} />,
@@ -52,7 +88,7 @@ export default function BottomTabNavigator() {
 
       {/* Contacts Stack Start */}
       <BottomTab.Screen
-        name="Contacts"
+        name={i18n.t('BottomContactsTab')}
         component={ContactsNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-people" color={color} />,
@@ -62,7 +98,7 @@ export default function BottomTabNavigator() {
 
       {/* Parameters Stack Start */}
       <BottomTab.Screen
-        name="Paramètres"
+        name={i18n.t('BottomSettingsTab')}
         component={ParametresNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-settings" color={color} />,
@@ -90,14 +126,14 @@ function ChatsNavigator() {
         name="ChatsScreen"
         component={ChatsScreen}
         options={{ 
-          headerTitle: 'Chats'
+          headerTitle: i18n.t('ChatScreenTitle')
         }}
       />
       <ChatsStack.Screen
         name="ChatViewScreen"
         component={ChatViewScreen}
         options={{ 
-          headerTitle: 'Discussion'
+          headerTitle: i18n.t('ChatViewScreenTitle')
         }}
       />
     </ChatsStack.Navigator>
@@ -113,7 +149,7 @@ function TemoignagesNavigator({ navigation }) {
         name="TemoignagesScreen"
         component={TemoignagesScreen}
         options={{ 
-          headerTitle: 'Témoignages',
+          headerTitle: i18n.t('TemoignagesScreenTitle'),
           headerRight: () => (
             <Button
               icon={
@@ -135,7 +171,7 @@ function TemoignagesNavigator({ navigation }) {
         name="TemoignageCreateScreen"
         component={TemoignageCreateScreen}
         options={{ 
-          headerTitle: 'Nouveau Témoignage'
+          headerTitle: i18n.t('TemoignageCreateScreenTitle')
         }}
       />
 
@@ -143,7 +179,7 @@ function TemoignagesNavigator({ navigation }) {
         name="TemoignageViewScreen"
         component={TemoignageViewScreen}
         options={{ 
-          headerTitle: 'Témoignage'
+          headerTitle: i18n.t('TemoignageViewScreenTitle')
         }}
       />
     </TemoignagesStack.Navigator>
@@ -160,7 +196,7 @@ function ContactsNavigator() {
         name="ContactsScreen"
         component={ContactsScreen}
         options={{ 
-          headerTitle: 'Contacts'
+          headerTitle: i18n.t('ContactsScreenTitle')
         }}
       />
     </ContactsStack.Navigator>
@@ -177,7 +213,7 @@ function ParametresNavigator() {
         name="ParametresScreen"
         component={ParametresScreen}
         options={{
-          headerTitle: 'Paramètres'
+          headerTitle: i18n.t('SettingsScreenTitle')
         }}
       />
     </ParametresStack.Navigator>
