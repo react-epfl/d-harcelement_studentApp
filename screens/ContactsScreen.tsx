@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, FlatList, RefreshControl, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
 import { useState } from 'react';
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import {Linking} from 'react-native'
 import { format } from 'react-string-format';

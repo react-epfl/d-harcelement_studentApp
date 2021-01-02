@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, TextInput, ScrollView, Image } from 'react-native';
+import { StyleSheet, ScrollView, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ChatBot from 'react-native-chatbot';
 import ChatBotSteps from '../../constants/ChatBotSteps';

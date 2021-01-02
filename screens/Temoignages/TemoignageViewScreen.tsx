@@ -20,6 +20,7 @@ i18n.translations = {
     },
     'fr-CH':
     {
+      OKButton: 'OK'
     }
 }
 i18n.locale = Localization.locale;

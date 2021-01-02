@@ -2,8 +2,6 @@ import * as React from 'react';
 import { useState } from 'react';
 import { StyleSheet, FlatList, RefreshControl, TouchableOpacity, ActivityIndicator } from 'react-native';
 import Colors from '../constants/Colors';
-import { Ionicons } from '@expo/vector-icons';
-import { Button } from 'react-native-elements';
 
 import { Text, View } from '../components/Themed';
 

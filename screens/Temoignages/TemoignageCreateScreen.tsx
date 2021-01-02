@@ -2,10 +2,7 @@ import { preventAutoHide } from 'expo-splash-screen';
 import * as React from 'react';
 import { StyleSheet, TextInput, ScrollView, KeyboardAvoidingView, Keyboard, Platform, TouchableWithoutFeedback } from 'react-native';
 import { Button } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import Colors from '../../constants/Colors';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Text, View } from '../../components/Themed';
+import { View } from '../../components/Themed';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 

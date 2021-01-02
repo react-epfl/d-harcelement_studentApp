@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { StyleSheet, Switch, Button, Alert} from 'react-native';
+import { StyleSheet, Button, Alert} from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
-import { SettingsScreen, SettingsData, Chevron  } from "react-native-settings-screen"
+import { SettingsScreen, SettingsData  } from "react-native-settings-screen"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notifications from 'expo-notifications';
 import {Picker} from '@react-native-picker/picker';
@@ -34,10 +33,13 @@ i18n.translations = {
       AlertClearDataMessage: 'Les données sont supprimées',
       SettingsHeader: 'Paramètres généraux',
       SchoolNumber: 'Numéro d\'école',
+      AvatarSetting: 'Avatar',
+      NotificationsSetting: 'Notifications',
       RemoveDataSetting: 'Supprimer les données',
       oneday: '1 jour',
       twoday: '2 jours',
       oneweek: '1 semaine',
+      fivemin: '5 minutes',
       DeleteButton: 'Supprimer'
     }
 }
@@ -74,11 +76,12 @@ export default function ParametresScreen() {
       await AsyncStorage.removeItem('@school_id')
       await AsyncStorage.removeItem('@avatar')
       await Notifications.cancelAllScheduledNotificationsAsync()
+      Alert.alert(i18n.t('AlertClearDataMessage'))
     } catch(e){
       console.error(e);
     }
 
-    Alert.alert(i18n.t('AlertClearDataMessage'))
+    
   }
 
   const getSchoolData = async () => {

@@ -2,7 +2,6 @@ import * as React from 'react';
 import {useState } from 'react';
 import { StyleSheet, FlatList, Image, TouchableOpacity, ScrollView } from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 
 import Colors from '../constants/Colors';
