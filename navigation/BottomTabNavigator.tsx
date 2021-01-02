@@ -27,12 +27,12 @@ i18n.translations = {
     'en-US': 
     {
       BottomChatTab: 'Chats',
-      BottomTemoignageTab: 'Temoignages',
+      BottomTemoignageTab: 'Testimonials',
       BottomContactsTab: 'Contacts',
       BottomSettingsTab: 'Settings',
       ChatScreenTitle: 'Chat',
       ChatViewScreenTitle: 'Discussion',
-      TemoignagesScreenTitle: 'Temoignages',
+      TemoignagesScreenTitle: 'Testimonials',
       TemoignageCreateScreenTitle: 'New temoignage',
       TemoignageViewScreenTitle: 'Temoignage',
       ContactsScreenTitle: 'Contacts',
