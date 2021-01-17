@@ -14,34 +14,34 @@ import i18n from 'i18n-js'
 
 // Set the key-value pairs for the different languages supports
 i18n.translations = {
-    'en-US': 
-    {
-      AlertClearDataMessage: 'Data are erased',
-      SettingsHeader: 'General Settings',
-      SchoolNumber: 'School number',
-      AvatarSetting: 'Avatar',
-      NotificationsSetting: 'Notifications',
-      RemoveDataSetting: 'Delete data',
-      oneday: '1 day',
-      twoday: '2 days',
-      oneweek: '1 week',
-      fivemin: '5 minutes',
-      DeleteButton: 'Delete'
-    },
-    'fr-CH':
-    {
-      AlertClearDataMessage: 'Les données sont supprimées',
-      SettingsHeader: 'Paramètres généraux',
-      SchoolNumber: 'Numéro d\'école',
-      AvatarSetting: 'Avatar',
-      NotificationsSetting: 'Notifications',
-      RemoveDataSetting: 'Supprimer les données',
-      oneday: '1 jour',
-      twoday: '2 jours',
-      oneweek: '1 semaine',
-      fivemin: '5 minutes',
-      DeleteButton: 'Supprimer'
-    }
+  'en-US': 
+  {
+    AlertClearDataMessage: 'Data are erased',
+    SettingsHeader: 'General Settings',
+    SchoolNumber: 'School number',
+    AvatarSetting: 'Avatar',
+    NotificationsSetting: 'Notifications',
+    RemoveDataSetting: 'Delete data',
+    oneday: '1 day',
+    twoday: '2 days',
+    oneweek: '1 week',
+    fivemin: '5 minutes',
+    DeleteButton: 'Delete'
+  },
+  'fr-CH':
+  {
+    AlertClearDataMessage: 'Les données sont supprimées',
+    SettingsHeader: 'Paramètres généraux',
+    SchoolNumber: 'Numéro d\'école',
+    AvatarSetting: 'Avatar',
+    NotificationsSetting: 'Notifications',
+    RemoveDataSetting: 'Supprimer les données',
+    oneday: '1 jour',
+    twoday: '2 jours',
+    oneweek: '1 semaine',
+    fivemin: '5 minutes',
+    DeleteButton: 'Supprimer'
+  }
 }
 i18n.locale = Localization.locale;
 i18n.fallbacks = true;
