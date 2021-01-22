@@ -12,10 +12,13 @@ export type BottomTabParamList = {
 
 export type ChatsParamList = {
   ChatsScreen: undefined;
+  ChatViewScreen: undefined;
 };
 
 export type TemoignagesParamList = {
   TemoignagesScreen: undefined;
+  TemoignageCreateScreen: undefined;
+  TemoignageViewScreen: undefined;
 };
 
 export type ContactsParamList = {

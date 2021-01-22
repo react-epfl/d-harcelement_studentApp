@@ -1,5 +1,8 @@
 {
   "expo": {
+    "android": {
+      "useNextNotificationsApi": true
+    },
     "name": "d-harcelement",
     "slug": "d-harcelement",
     "version": "1.0.0",
